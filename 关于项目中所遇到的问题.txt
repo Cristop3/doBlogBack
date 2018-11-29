@@ -1,0 +1,143 @@
+1.vue-router的懒加载组件部分并未在界面中显示出来？
+
+--自己路由路由路径出错
+
+
+2.如何监听窗口大小事件来进行侧边栏的变化？
+
+
+
+
+3.兄弟组件之间的通信通过什么来控制？
+
+--通过vuex:state,mutation,action,组件内computed
+
+
+4.elementUI折叠 有延迟消失小问题？
+
+
+
+5.elementUI的滚动条美化？
+
+
+
+6.v-for循环需绑定个key值，绑定了字符串会出错？
+
+--绑定数字
+
+
+7.使用elementUI中的侧边栏 菜单栏没有对齐？
+
+--使用的图标有问题，使用el-icon-setting就会导致不一样
+
+
+8.侧边栏菜单设置default-opend收缩展开报错？
+
+--注意该属性要定义个数组，不要定义为string,写在data头
+
+9.vuex中引入mutations-type在index中使用type.xxx会报错？
+
+--证明type.xx不好用，如果是typescript的话可以引入MutationsTree来解决type.xxx
+--我这里就很正常的import一个对象
+
+10.v-for循环中嵌套子组件删除任一个都会删除最后一个元素？
+
+--10.1首先检查删除数组元素的逻辑是否正确。
+--10.2这个问题的原因是由于:key值 我绑定的是index ,但是他嵌套了一层组件 未来的急更改渲染
+--把:key更改为第一无二的值
+
+11.关于横向滚动条出现或者纵向滚动条显示不完整？
+--分层理清楚每层的width,height设置的是否对，然后在设置
+--了width:100%后再设置padding就会比原来大出现滚动条.
+--设置max-height出现纵向滚动条
+
+12.elementUI loading组件 要点击两次才有效果？
+
+
+
+13.在elementUI中使用@keyup.enter无效？
+
+--第一检查自己是否绑定在最后一个输入框上；
+--第二在@keyup.enter.native加个native
+
+14.如何用nodejs产生token来检验每次的请求？
+
+--使用jsonwebtoken库
+--联合axios拦截器使用
+
+15.在前台写入token是否能在axios拦截器中，而不是在login页面？
+
+
+
+16.export default xxx与module.export = xx 有什么区别？
+
+
+
+17.axios post方式提交数据 node端req.body.xx为undfined？
+
+--17.1 第一个涉及的是node端express框架分离出了解析post数据的部分，为body-parser，单独安装
+--17.2 使用body-parser要写在路由的前面
+--17.3 这里牵扯出了关于http协议的知识，是我乱用了http的header的Content-Type的传输协议导致的，关于http协议这块下来还需要再看
+
+
+18.关于vuejs监听窗口大小事件？
+
+19.组件页面进来如何进行抽数？
+
+--使用生命周期created或者mounted，但是遇到组件复用的时候有缓存恼火
+--配合keep-alive路由缓存 使用actived来使用
+
+20.如何调试nodejs?
+
+--就用vscode自带的调试 非常好用
+--需要配置lauch.json
+
+21.如何防止浏览器F5刷新重置vuex？
+
+--登录成功将用户信息保存在localStorage或者sessionStorage或者cookie中，检查vuex中没的就在本地
+缓存中获取
+
+22.elementUI中下拉如何绑定路由？
+
+--使用el中绑定的command
+--在函数中使用this.$router.push()来跳转
+
+23.退出登录中如何重置vuex的值？
+
+--1.在初始化时深拷贝state
+--2.登出触发actions,提交mutations处理
+--3.但是还是很笨重的全部重新赋值（目前没想到更好的办法）
+--4.直接删除state的属性 但是没搞清楚 它又是在什么时候赋值的
+Object.keys(state).forEach(k => Vue.delete(state, k))
+
+
+24.vue中使用深拷贝复制初始值的vuex中的state值？
+
+--1.利用Object.asign() 递归检查typeof = obj的
+--2.直接JSON.parse(JSON.stringify(obj))
+
+
+25.vue中调用action报错？
+actions should be function or object with "handler" function but "actions.default" is {}.
+
+--结果是在new对象的时候变量绑成了action
+--应该和mutations一样有一个s：actions
+--这里需要注意的时候不能写一个actions={
+}对象这种 会报上面的错
+--直接写成export const xxx = () => {}c
+
+26.如何在elementUI下引入第三方图标库？
+
+--阿里巴巴图标库->登录->创建项目->选择图标加入->添加至我的项目->下载到本地->取5个加入
+
+
+27.如何设置el的弹框重渲染？
+
+--重置表单
+
+28.el上传图片失败？提示：
+Uncaught DOMException: Failed to execute 'open' on 'XMLHttpRequest': Invalid URL
+
+--url前面一定要加http://
+
+29.
